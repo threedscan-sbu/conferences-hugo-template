@@ -33,14 +33,15 @@
             <ul class="timeline timeline-split">
               {{ with .Site.GetPage "section" "conferences" }}
               {{ range (.Pages.ByParam "due").Reverse }}
-              {{if ge (.GetParam "due") now }}
+              {{if ge (.GetParam "due").Year now.Year }}
                 <li class="timeline-item">
                     <div class="timeline-info">
                         <span>{{ (.GetParam "due").Format "January 2, 2006" }}</span>
                     </div>
                     <div class="timeline-marker"></div>
                     <div class="timeline-content">
-                        <a href="{{.Params.link}}" target = "_blank"><h3 class="timeline-title">{{.Title}} ({{.GetParam "field"}})</h3></a>
+                        <a href="{{.Params.link}}" target = "_blank"><h3 class="timeline-title">{{.Title}} </h3></a>
+                        <h4> {{.GetParam "fullname"}}</h4>
                         <p>{{.Content}}</p>
                     </div>
                 </li>

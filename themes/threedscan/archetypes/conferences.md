@@ -8,7 +8,7 @@ draft = false
 
 fullname = ""
 link = ""
-field = ""
+due =  {{ .Date }}
 
 +++
 

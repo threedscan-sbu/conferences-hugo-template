@@ -15,8 +15,8 @@ due = 2019-03-01T13:56:23-04:00
 
 | | |
 |---|---|
-|Main Conference|	October 27, 2019 - November 3, 2019|
 |Paper Submission Deadline |	March, 2019|
 |Rebuttal Due|	May, 2019|
 |Area Chair Meeting Notification of Acceptance|	June, 2019|
 |Camera-Ready Deadline|	July, 2019|
+|Main Conference|	October 27, 2019 - November 3, 2019|
