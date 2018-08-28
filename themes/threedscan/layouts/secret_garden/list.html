@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>A Story of True Love</title>
+  
+  
+  
+      <link rel="stylesheet" href="{{ "/css/timeline.css"| relURL}}" >
+
+  
+</head>
+
+<body>
+  <section class="intro">
+  <div class="container">
+    <h1>A Story of True Love</h1>
+  </div>
+</section>
+
+<section class="timeline">
+  <ul>
+    {{range .Pages}}
+    {{$hasURL := .Params.bundle | default true}}
+    <li>
+      <div>
+        <time>{{.Date.Format "January 2, 2006"}}</time> 
+
+        <strong><a class="text-dark" style="color:white" {{if $hasURL}} href="{{ .RelPermalink }}" {{end}}>{{ .Title | markdownify }}</a></strong>
+      </div>
+    </li>
+    {{end}}
+  </ul>
+</section>
+  
+    <script src="{{ "/js/timeline.js"| relURL}}"></script>
+
+</body>
+</html>

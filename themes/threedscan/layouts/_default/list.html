@@ -1,0 +1,15 @@
+{{ define "main" }}
+{{ $truncate := default true .Site.Params.truncate }}
+<div id="container">
+{{ range .Paginator.Pages }}
+
+    {{ if $truncate }}
+        {{ .Render "summary" }}
+    {{ else }}
+        {{ .Render "content" }}
+    {{ end }}
+{{ end }}
+</div>
+{{ partial "paginator" . }}
+
+{{ end }}

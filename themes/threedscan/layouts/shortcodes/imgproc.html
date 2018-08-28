@@ -1,0 +1,19 @@
+
+{{ $original := index (.Page.Resources.Match (printf "%s*" (.Get 0))) 0 }}
+{{ $command := .Get 1 }}
+{{ $options := .Get 2 }}
+{{ if eq $command "Fit"}}
+{{ .Scratch.Set "image" ($original.Fit $options) }}
+{{ else if eq $command "Resize"}}
+{{ .Scratch.Set "image" ($original.Resize $options) }}
+{{ else if eq $command "Fill"}}
+{{ .Scratch.Set "image" ($original.Fill $options) }}
+{{end}}
+
+{{ $image := .Scratch.Get "image" }}
+
+{{$left := index (seq 400 | shuffle) 0}}
+{{$top := index (seq 300 | shuffle) 0}}
+{{$degree := index (seq -45 45 | shuffle) 0}}
+
+<img style="left:{{$left}}px;top:{{$top}}px;transform:rotate({{$degree}}deg);z-index:1" src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">

@@ -1,0 +1,24 @@
+<p class="margin">&nbsp;</p>
+<div class="card-columns">
+    {{ range .Paginator.Pages }} 
+    
+  <div class="card">
+      {{if .Params.external_link}}
+        {{$link := .Params.external_link}}
+        <a class="text-dark" target="_blank" href="{{$link}}"><img class="card-img-top" src='{{ $.Site.BaseURL }}img/{{ .Params.image_preview}}' alt="{{ .Title | markdownify }}"></a>
+      <div class="card-body">
+        <h5 class="card-title"> <a class="text-dark" target="_blank"  href="{{$link}}">{{ .Title | markdownify }}</a></h5>
+        <p class="card-text">{{.Params.summary}}</p>
+      </div>
+      {{else}}
+        {{$link := .RelPermalink}}
+        <a class="text-dark" href="{{$link}}"><img class="card-img-top" src='{{ $.Site.BaseURL }}img/{{ .Params.image_preview}}' alt="{{ .Title | markdownify }}"></a>
+      <div class="card-body">
+        <h5 class="card-title"> <a class="text-dark" href="{{$link}}">{{ .Title | markdownify }}</a></h5>
+        <p class="card-text">{{.Params.summary}}</p>
+      </div>
+      {{end}}
+        </div>
+
+    {{end}}
+</div>

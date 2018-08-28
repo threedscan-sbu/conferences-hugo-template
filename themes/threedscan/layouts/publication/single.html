@@ -1,0 +1,75 @@
+{{define "main"}}
+<div class="container">
+<div id="container">
+    <h2 class="blog-post-title">{{.Title}}</h2>
+    <br>
+    <p class="container publication-author">{{$me := .Site.Params.name}}
+        {{range $i, $name := .Params.authors}}
+            {{if ne $i 0}}
+                ,&nbsp;
+            {{end}}
+            {{if eq $name $me}}
+                <strong>{{$name}}</strong>
+            {{else}}
+                {{$name}}
+            {{end}}
+        {{end}}
+    </p>
+    <br>
+    {{if .Params.header.image}}
+    <div>
+        <img src='{{ $.Site.BaseURL }}img/{{ .Params.header.image}}' border="1" width="100%">
+        {{end}}
+        {{if .Params.header.caption}}
+        <p class="publication-caption">
+        {{.Params.header.caption}}
+        </p>
+        {{end}}
+    </div>
+    
+    <div class="post-content">
+        <hr>
+        <h3 class="post-content">Abstract</h3>
+        <p align="justify">{{.Params.abstract}}</p>
+        <hr class="post-content">
+        {{if .WordCount}}
+        {{.Content}}
+        <hr>
+        {{end}}
+        {{if .Params.video_id}}
+         <h3 class="post-content">Video</h3>
+         ​<iframe width="560" height="315" src="//www.youtube.com/embed/{{.Params.video_id}}?autoplay=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+         <hr>
+        {{end}}
+            <div class="card-columns" align="left">
+                 <div class="card border-0" style="width: 90%">
+                    <h3>Downloads</h3>
+                    <p>
+                    {{if .Params.url_pdf}}
+                    <strong><a href="{{.Params.url_pdf}}" target="_blank">[Paper]</a></strong>
+                    {{end}}
+                    {{if .Params.url_slides}}
+                    <strong><a href="{{.Params.url_pdf}}" target="_blank">[Slides]</a></strong>
+                    {{end}}
+                    {{if .Params.url_code}}
+                    <strong><a href="{{.Params.url_pdf}}" target="_blank">[Code]</a></strong>
+                    {{end}}
+                    {{if .Params.url_dataset}}
+                    <strong><a href="{{.Params.url_pdf}}" target="_blank">[Dataset]</a></strong>
+                    {{end}}
+                    </p>
+                 </div>
+
+                 <div class="card border-0" style="width: 130%">
+                    <h3>BibTex</h3>
+                {{range .Params.bibtex}}
+                <div class="publication-bib">{{.}}<br></div>
+                {{end}}
+                 </div>
+
+            </div>
+       
+    </div>
+</div>
+</div>
+{{end}}

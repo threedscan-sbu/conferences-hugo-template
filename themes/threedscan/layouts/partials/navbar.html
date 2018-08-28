@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="{{ .Site.BaseURL }}"><img src='{{ $.Site.BaseURL }}img/{{ $.Site.Params.logo }}'  height="25">  {{ .Site.Title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      {{ $currentNode := . }}
+      {{ range .Site.Menus.main.ByWeight}}
+      <li class="nav-item {{if eq $currentNode.Section .URL}} active{{end}}">
+        {{if eq .Name "CV"}}
+         <a class="nav-link" target="_blank" href="{{ $.Site.BaseURL }}{{.URL}}">{{ .Name }}</a>
+        {{else}}
+        <a class="nav-link"  href="{{ $.Site.BaseURL }}{{.URL}}">{{ .Name }}</a>
+        {{end}}
+      </li>
+      {{ end }}
+    </ul>
+
+  </div>
+</nav>

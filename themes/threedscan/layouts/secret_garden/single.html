@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{.Title}}</title>
+    <style>
+    * {margin:0; padding:0;}
+    body { background-color: #eee; padding-top: 50px;}
+    h2 { text-align: center;}
+    .container { position: relative; width:1000px; height:700px; margin:0px auto; }
+    img { position: absolute; top:50px; left:100px; cursor: pointer;
+    padding:10px 10px 25px; background-color: #fff; border:1px solid #ddd;
+    transition:0.5s; box-shadow: 3px 3px 3px #ccc;
+    }
+    img:hover { transform:rotate(0deg); transform:scale(1.5); box-shadow: 6px 6px 6px #656565; z-index: 2;}
+    {{$delta := 3}}
+    {{range (seq 0 50)}}
+        {{if (modBool (div . $delta) 2)}}
+            {{$left := mul 300 (mod . $delta)}}
+            {{$top := mul 300 (div . $delta)}}
+            {{$degree := index (seq -60 60 | shuffle) 0}}
+            .img{{.}} {
+                left:{{$left}}px;
+                top:{{$top}}px;
+                transform:rotate({{$degree}}deg);
+                z-index:1;
+            }
+        {{else}}
+            {{$left := add 150 (mul 300 (mod . $delta))}}
+            {{$top :=  (mul 300 (div . $delta))}}
+            {{$degree := index (seq -60 60 | shuffle) 0}}
+            .img{{.}} {
+                left:{{$left}}px;
+                top:{{$top}}px;
+                transform:rotate({{$degree}}deg);
+                z-index:1;
+            }
+        {{end}}
+    {{end}}
+</style>
+</head>
+<body>
+<div class="container">
+
+{{ $imglist := .Page.Resources.Match "*" }}
+{{ range $index, $original := first 100 $imglist}}
+{{ $.Scratch.Set "image" ($original.Resize "200x") }}
+{{ $image := $.Scratch.Get "image" }}
+<a href="{{$original.RelPermalink}}" target="_blank"><img class="img{{$index}}" src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}">
+{{end}}
+</a>
+</div>
+
+</body>
+</html>

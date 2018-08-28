@@ -1,0 +1,31 @@
+
+<p class="margin">&nbsp;</p>
+<table border="0">
+    {{ range .Paginator.Pages }}
+  <tbody><tr>
+    <td width="120" valign="middle"><img src='{{ $.Site.BaseURL }}img/{{ .Params.image_preview}}' border="1" width="120"></td>
+    <td width="20"></td>
+    <td valign="middle" width="700"><h4 class="publication-title">
+            <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+        </h4>
+      <p class="publication-author">
+        {{$me := .Site.Params.name}}
+        {{range $i, $name := .Params.authors}}
+            {{if ne $i 0}}
+                ,&nbsp;
+            {{end}}
+            {{if eq $name $me}}
+                <strong>{{$name}}</strong>
+            {{else}}
+                {{$name}}
+            {{end}}
+        {{end}}
+    </p>
+      <a class="publication-journal">{{.Params.publication}}. <a class = "publication-author"> {{.Params.year}}. </a></p>
+      <p class="margin-small">&nbsp;</a>
+      </td></tr>
+      <td height="20" valign="middle"></td>
+</tbody>
+{{end}}
+
+</table>
