@@ -33,7 +33,7 @@
             <ul class="timeline timeline-split">
               {{ with .Site.GetPage "section" "conferences" }}
               {{ range (.Pages.ByParam "due").Reverse }}
-              {{if ge (.GetParam "due").Year now.Year }}
+              {{if ge (.GetParam "due") now }}
                 <li class="timeline-item">
                     <div class="timeline-info">
                         <span>{{ (.GetParam "due").Format "January 2, 2006" }}</span>
